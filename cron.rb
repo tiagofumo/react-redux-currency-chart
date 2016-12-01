@@ -37,6 +37,7 @@ end
 def load_data_into_json(file_name)
   file_path = relative_path file_name
   quotes_by_date = JSON.parse File.read(file_path)
+  quotes_by_date.delete Date.today.strftime('%Y%m%d')
   quotes_dates = quotes_by_date.keys
   missing_dates = last_n_dates(7).select do |i|
     !quotes_dates.include? i.strftime('%Y%m%d')
